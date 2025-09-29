@@ -18,6 +18,19 @@ public class AudioCubesController : MonoBehaviour
     [SerializeField, Range(1,6), Tooltip("Range: 1-6 (64/128/256/512/1028/2048/)")]
     public int spectrumFactor = 1;
 
+    public void SetCubeSize(float newSize)
+    {
+        cubeSize = newSize;
+    }
+
+    public void SetCubeMaxAmplitude(float newMax){
+        cubeMaxAmplitude = newMax;
+    }
+
+    public void SetSpectrumFactor(float newFactorFloat){
+        spectrumFactor = Mathf.Clamp(Mathf.RoundToInt(newFactorFloat), 1, 6);
+    }
+
     //Audio Visualizer Components
     [SerializeField] public GameObject cubeSource;
     Transform[] targetArray = null;
@@ -31,8 +44,7 @@ public class AudioCubesController : MonoBehaviour
     Transform[] cubeSpectrumData1024 = new Transform[1024];
     Transform[] cubeSpectrumData2048 = new Transform[2048];
 
-    void Update()
-    {
+    void Update(){
         //vizualize music by transforming cubes
         switch(spectrumFactor)
         {
